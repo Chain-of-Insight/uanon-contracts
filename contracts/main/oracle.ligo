@@ -17,6 +17,7 @@
 #endif
 
 #include "../partials/oracle/puzzles.ligo"
+#include "../partials/oracle/proxy.ligo"
 
 
 function main (const action : entry_action; var s : storage) : return is
@@ -28,6 +29,7 @@ function main (const action : entry_action; var s : storage) : return is
     | Create(params) -> createPuzzle(params, s)
     | Update(params) -> updatePuzzle(params, s)
     | Solve(params)  -> claimReward(params, s)
+    | SetProxy(params) -> setProxy(params, s)
 
 #if CONTRACT__WHITELIST_AUTHORS
     | AddAuthor(params) -> addAuthor(params, s)

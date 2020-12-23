@@ -67,6 +67,7 @@ type entry_action is
   | Create of createParams
   | Update of createParams
   | Solve of solveParams
+  | SetProxy of trusted
 
 #if CONTRACT__WHITELIST_AUTHORS
   | AddAuthor of authorParams

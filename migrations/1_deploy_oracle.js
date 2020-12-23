@@ -6,10 +6,10 @@ const saveContractAddress = require('./../helpers/saveContractAddress');
 const initial_storage = {
     paused: false,
     roles: {
-        owner: 'tz1aSkwEot3L2kmUvcoxzjMomb9mvBNuzFK6',
-        author: [ 'tz1VSUr8wwNhLAzempoch5d6hLRiTh8Cjcjb' ]
+        owner: 'tz1codeYURj5z49HKX9zmLHms2vJN2qDjrtt',
+        author: [ 'tz1codeYURj5z49HKX9zmLHms2vJN2qDjrtt' ]
     },
-    rewardProxy: 'KT1V4z3AyWh1CqDgAe9gEFnihaPo8mXxVJ4a',
+    rewardProxy: 'tz1codeYURj5z49HKX9zmLHms2vJN2qDjrtt',
     puzzles: MichelsonMap.fromLiteral({})
 };
 
