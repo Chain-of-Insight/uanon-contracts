@@ -16,16 +16,24 @@ jobs:
       with:
         python-version: '3.x'
         architecture: 'x64'
-    - name: Install dependencies
+    - name: Set up Node
+      uses: actions/setup-node@v1
+      with:
+        node-version: '14.x'
+    - name: Install Python dependencies
       run: |
         sudo apt-get install -y libsecp256k1-dev
         python -m pip install --upgrade pip setuptools==51.1.0 wheel
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - name: Install Node dependencies
+      run: yarn install
     - name: Start flextesa sandbox
       run: docker run --rm -p 8732:20000 --detach tqtezos/flextesa:20201214 delphibox start
     - name: Sleep for 20 seconds
       uses: jakejarvis/wait-action@master
       with:
-        time: '20s' 
+        time: '20s'
+    - name: Compile contracts
+      run: yarn compile
     - name: Run tests
       run: pytest test -v
