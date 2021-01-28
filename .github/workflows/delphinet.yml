@@ -40,13 +40,11 @@ jobs:
     - name: Docker cache
       uses: satackey/action-docker-layer-caching@v0.0.11
       continue-on-error: true
-    - name: Start flextesa sandbox
-      run: docker run --rm -p 8732:20000 --detach tqtezos/flextesa:20201214 delphibox start
-    - name: Sleep for 20 seconds
-      uses: jakejarvis/wait-action@master
-      with:
-        time: '20s'
+    - name: Start sandbox
+      run: yarn delphibox:start
+    - name: Wait for sandbox
+      run: yarn sandbox:wait
     - name: Compile contracts
       run: yarn compile
     - name: Run tests
-      run: pytest test -v
+      run: yarn test
