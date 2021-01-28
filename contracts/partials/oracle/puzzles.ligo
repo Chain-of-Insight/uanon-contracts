@@ -17,7 +17,7 @@ function createPuzzle (const input : createParams; var s : storage) : return is
 
     (* Make sure puzzle doesn't exist *)
     case s.puzzles[input.id] of
-        Some (puzzle) -> failwith ("Puzzle already exists.")
+        Some (puzzle) -> failwith ("PuzzleExists")
       | None -> skip
       end;
 
@@ -51,17 +51,17 @@ function updatePuzzle (const input : createParams; var s : storage) : return is
     const puzzle_instance : puzzle =
       case s.puzzles[input.id] of
         Some (instance) -> instance
-      | None -> (failwith ("Unknown puzzle index") : puzzle)
+      | None -> (failwith ("UnknownPuzzle") : puzzle)
       end;
 
     (* Only author can update *)
     if Tezos.sender =/= puzzle_instance.author then
-      failwith("Cannot update puzzle");
+      failwith("OperationNotAllowed");
     else skip;
 
     (* One caveat; rewards cannot be less than already claimed *)
     if input.rewards < Map.size(puzzle_instance.claimed) then
-      failwith("Cannot update puzzle");
+      failwith("OperationNotAllowed");
     else skip;
 
     (* Update puzzle *)
@@ -88,7 +88,7 @@ function claimReward (const input : solveParams; var s : storage) : return is
     const puzzle_instance : puzzle =
       case s.puzzles[input.id] of
         Some (instance) -> instance
-      | None -> (failwith ("Unknown puzzle index") : puzzle)
+      | None -> (failwith ("UnknownPuzzle") : puzzle)
       end;
 
     (* Contract owner claiming prize? *)
@@ -98,7 +98,7 @@ function claimReward (const input : solveParams; var s : storage) : return is
 
     (* Author claiming own prize? *)
     if Tezos.sender = puzzle_instance.author then
-      failwith("No rewards are claimable.");
+      failwith("OperationNotAllowed");
     else skip;
 
     (* Current depth in hashchain to verify *)
@@ -106,19 +106,19 @@ function claimReward (const input : solveParams; var s : storage) : return is
 
     (* Puzzle must have claimable rewards remaining *)
     if atdepth < 1n then
-      failwith ("No rewards are claimable.");
+      failwith ("NothingClaimable");
     else skip;
 
     (* Address already claimed *)
     case puzzle_instance.claimed[Tezos.sender] of
-        Some (claimed) -> failwith ("No rewards are claimable.")
+        Some (claimed) -> failwith ("AlreadyClaimed")
       | None -> skip
       end;
 
     (* Verify submitted proof *)
     if verify_proof(input.proof, puzzle_instance.rewards_h, puzzle_instance.rewards + 1n, atdepth) then
       skip;
-    else failwith("Solution proof could not be verified.");
+    else failwith("InvalidProof");
 
     (* Increase claimed by 1 after distribution *)
     const claim_num : nat = Map.size(puzzle_instance.claimed) + 1n;
