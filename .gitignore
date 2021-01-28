@@ -3,3 +3,5 @@ node_modules/
 deployments/
 scripts/tools/**
 !scripts/tools/*.js
+accounts.js
+!scripts/sandbox/accounts.js
