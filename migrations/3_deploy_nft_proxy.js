@@ -16,5 +16,5 @@ module.exports = async (deployer, network, accounts) => {
     await deployer.deploy(nftProxy, initial_storage);
 
     const contract = await nftProxy.deployed();
-    saveContractAddress('nft_proxy', contract.address);
+    saveContractAddress('nft_proxy', contract.address, network);
 };

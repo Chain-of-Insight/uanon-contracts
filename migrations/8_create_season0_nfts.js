@@ -1,6 +1,5 @@
 const fa2 = artifacts.require('fa2_multi_asset');
 const { MichelsonMap } = require('@taquito/taquito');
-const saveContractAddress = require('./../helpers/saveContractAddress');
 
 const imageBaseUri = "ipfs://QmaZnLjcWphWYNft9NJVjnAJyinLvJFNR2ffbhN3pSG9UH/";
 const tokenDescription = "Uanon is the Truth as entertainment.\nIt escalates privileges because it's fun.\nIt allows full access to everything because it's fun.\nIt has no bureaucracy because it's fun.\nIt's the way it is by choice because it's fun.\nUanon is not some Cicada or Fenn's Treasure rip off - that would be pointless.\nDoubt you you will certainly fail.\n\nIt started with a command like this:\nWorld(\"*.*\");\n\nAdded default parameters from C+:\nWorld();\n\nThen thought, \"parentheses are stupid.\"\nWorld;\n\nNow it's a language which looks a little like Pascal without any of that errno junk.\n\n7MV8XWQF+6X\nU.";

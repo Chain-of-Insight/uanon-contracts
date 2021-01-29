@@ -20,6 +20,6 @@ module.exports = async (deployer, network, accounts) => {
 
     // TODO format to await instead of .then
     deployer.deploy(oracle, initial_storage)
-        .then(contract => saveContractAddress('oracle', contract.address));
+        .then(contract => saveContractAddress('oracle', contract.address, network));
 
 };

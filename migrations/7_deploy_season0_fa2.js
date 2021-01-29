@@ -34,5 +34,5 @@ module.exports = async (deployer, network, accounts) => {
     await deployer.deploy(fa2, initial_storage);
 
     const fa2K = await fa2.deployed();
-    saveContractAddress('season0_fa2', fa2K.address);
+    saveContractAddress('season0_fa2', fa2K.address, network);
 };

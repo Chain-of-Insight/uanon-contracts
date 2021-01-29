@@ -25,5 +25,5 @@ module.exports = async (deployer, network, accounts) => {
     await deployer.deploy(rewardProxy, initial_storage);
 
     const rewardProxyK = await rewardProxy.deployed();
-    saveContractAddress('reward_proxy', rewardProxyK.address);
+    saveContractAddress('reward_proxy', rewardProxyK.address, network);
 };
