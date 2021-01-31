@@ -35,7 +35,7 @@ function grantNft (const input : grantParams; var s : storage) : return is
       const mintTx : mintTx =
         record [
           owner = input.addr;
-          token_id = input.claim;
+          token_id = r;
           amount = 1n;
         ];
       const mintParams : mintParams = list [ mintTx ];
