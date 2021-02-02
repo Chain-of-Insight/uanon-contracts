@@ -8,7 +8,7 @@ function calcSeed(var seed : nat; const depth : nat) : nat is
 function prng(var seed : nat; const depth : nat) : nat is
   block {
     seed := calcSeed(seed, depth);
-    const final : nat = (seed mod 10000n) / 1000n;
+    const final : nat = (seed mod 1000000n) / 1000n;
   } with final
 
 (* *)
