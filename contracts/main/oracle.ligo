@@ -2,6 +2,7 @@
 
 #define CONTRACT__PAUSABLE
 #define CONTRACT__WHITELIST_AUTHORS
+#define CONTRACT__WHITELIST_SOLVERS
 
 #include "../partials/oracle/types.ligo"
 #include "../partials/oracle/hasher.ligo"
@@ -10,6 +11,10 @@
 
 #if CONTRACT__PAUSABLE
 #include "../partials/pausable.ligo"
+#endif
+
+#if CONTRACT__WHITELIST_SOLVERS
+#include "../partials/oracle/solvers.ligo"
 #endif
 
 #if CONTRACT__WHITELIST_AUTHORS
@@ -30,6 +35,11 @@ function main (const action : entry_action; var s : storage) : return is
     | Update(params) -> updatePuzzle(params, s)
     | Solve(params)  -> claimReward(params, s)
     | SetProxy(params) -> setProxy(params, s)
+
+#if CONTRACT__WHITELIST_SOLVERS
+    | AllowSolver(params) -> allowSolver(params, s)
+    | RaiseHand(params) -> raiseHand(params, s)
+#endif
 
 #if CONTRACT__WHITELIST_AUTHORS
     | AddAuthor(params) -> addAuthor(params, s)

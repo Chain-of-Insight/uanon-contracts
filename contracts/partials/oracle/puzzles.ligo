@@ -29,7 +29,10 @@ function createPuzzle (const input : createParams; var s : storage) : return is
         rewards_h = input.rewards_h;
         rewards   = input.rewards;
         questions = input.questions;
-        claimed   = (map [] : claim)
+        claimed   = (map [] : claim);
+#if CONTRACT__WHITELIST_SOLVERS
+        solver    = (Tezos.sender, Tezos.now);
+#endif
       ];
 
     (* Update puzzle storage *)
@@ -114,6 +117,13 @@ function claimReward (const input : solveParams; var s : storage) : return is
         Some (claimed) -> failwith ("AlreadyClaimed")
       | None -> skip
       end;
+
+#if CONTRACT__WHITELIST_SOLVERS
+    (* Only current whitelisted solver is allowed *)
+    if isCurrentSolver(puzzle_instance) = False then
+      failwith("WaitYourTurn")
+    else skip;
+#endif
 
     (* Verify submitted proof *)
     if verify_proof(input.proof, puzzle_instance.rewards_h, puzzle_instance.rewards + 1n, atdepth) then
