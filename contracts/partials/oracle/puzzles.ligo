@@ -119,8 +119,8 @@ function claimReward (const input : solveParams; var s : storage) : return is
       end;
 
 #if CONTRACT__WHITELIST_SOLVERS
-    (* Only current whitelisted solver is allowed *)
-    if isCurrentSolver(puzzle_instance) = False then
+    (* Only current whitelisted solver is allowed for first claim *)
+    if Map.size(puzzle_instance.claimed) = 0n and isCurrentSolver(puzzle_instance) = False then
       failwith("WaitYourTurn")
     else skip;
 #endif
