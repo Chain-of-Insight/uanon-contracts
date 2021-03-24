@@ -1,4 +1,4 @@
-name: Delphi
+name: Edo
 
 on:
   push:
@@ -41,7 +41,7 @@ jobs:
       uses: satackey/action-docker-layer-caching@v0.0.11
       continue-on-error: true
     - name: Start sandbox
-      run: yarn delphibox:start
+      run: yarn edobox:start
     - name: Wait for sandbox
       run: yarn sandbox:wait
     - name: Compile contracts

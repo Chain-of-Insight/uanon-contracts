@@ -14,7 +14,7 @@ module.exports = {
       type: "tezos"
     },
     testnet: {
-      host: "https://testnet-tezos.giganode.io",
+      host: "https://edonet.smartpy.io",
       network_id: "*",
       secretKey: uanon.sk,
       type: "tezos"
