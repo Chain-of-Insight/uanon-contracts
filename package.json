@@ -58,6 +58,7 @@
     }
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "ganache-cli": "6.12.1-tezos.0"
   }
 }

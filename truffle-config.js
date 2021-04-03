@@ -20,7 +20,7 @@ module.exports = {
       type: "tezos"
     },
     mainnet: {
-      host: "https://mainnet-tezos.giganode.io",
+      host: "https://mainnet.smartpy.io",
       network_id: "*",
       secretKey: uanon.sk,
       type: "tezos"
